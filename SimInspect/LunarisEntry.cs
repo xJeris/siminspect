@@ -11,7 +11,7 @@ using Lunaris;
 
 namespace SimInspect
 {
-    [LunarisPlugin("Sim Inspector", "0.3.2", "xJeris",
+    [LunarisPlugin("Sim Inspector", "0.3.3", "xJeris",
         "Inspect any sim player's gear and stats, regardless of zone or proximity.")]
     public class LunarisEntry : LunarisPlugin
     {

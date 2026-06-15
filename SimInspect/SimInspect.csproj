@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <AssemblyName>SimInspect</AssemblyName>
-    <Version>0.3.1</Version>
+    <Version>0.3.3</Version>
     <LangVersion>9.0</LangVersion>
     <Deterministic>false</Deterministic>
   </PropertyGroup>
