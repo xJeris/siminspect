@@ -1,0 +1,73 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>SimInspect</AssemblyName>
+    <Version>0.3.1</Version>
+    <LangVersion>9.0</LangVersion>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Auto-detection: -p:ErenshorDir, then env var, then default Steam paths -->
+    <ErenshorDir Condition="'$(ErenshorDir)' == ''">$(ERENSHOR_DIR)</ErenshorDir>
+    <ErenshorDir Condition="'$(ErenshorDir)' == '' AND Exists('C:\Program Files (x86)\Steam\steamapps\common\Erenshor Playtest\Erenshor_Data')">C:\Program Files (x86)\Steam\steamapps\common\Erenshor Playtest</ErenshorDir>
+    <ErenshorDir Condition="'$(ErenshorDir)' == '' AND Exists('C:\Program Files (x86)\Steam\steamapps\common\Erenshor\Erenshor_Data')">C:\Program Files (x86)\Steam\steamapps\common\Erenshor</ErenshorDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Harmony (bundled with Lunaris at runtime) -->
+    <Reference Include="0Harmony">
+      <HintPath>$(ErenshorDir)\BepInEx\core\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <!-- Lunaris mod loader -->
+    <Reference Include="Lunaris">
+      <HintPath>$(ErenshorDir)\Lunaris.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <!-- Game assemblies -->
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(ErenshorDir)\Erenshor_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(ErenshorDir)\Erenshor_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(ErenshorDir)\Erenshor_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(ErenshorDir)\Erenshor_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(ErenshorDir)\Erenshor_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>$(ErenshorDir)\Erenshor_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(ErenshorDir)\Erenshor_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>$(ErenshorDir)\Erenshor_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Deploy to Lunaris plugins/ folder -->
+  <Target Name="DeployLunaris" AfterTargets="Build" Condition="'$(ErenshorDir)' != '' AND Exists('$(ErenshorDir)\Lunaris.dll')">
+    <PropertyGroup>
+      <LunarisDir>$(ErenshorDir)\plugins\SimInspect</LunarisDir>
+    </PropertyGroup>
+    <MakeDir Directories="$(LunarisDir)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(LunarisDir)" />
+  </Target>
+</Project>

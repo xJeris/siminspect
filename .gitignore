@@ -1,0 +1,20 @@
+# Build output
+SimInspect/bin/
+SimInspect/obj/
+
+# Claude Code project instructions
+CLAUDE.md
+
+# Decompiled reference data (not for distribution)
+reference/
+
+# IDE / editor
+.vs/
+.vscode/
+*.user
+*.suo
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
