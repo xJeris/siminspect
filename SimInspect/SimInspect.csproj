@@ -3,6 +3,8 @@
     <TargetFramework>net48</TargetFramework>
     <AssemblyName>SimInspect</AssemblyName>
     <Version>0.3.3</Version>
+    <Authors>xJeris</Authors>
+    <Company>xJeris</Company>
     <LangVersion>9.0</LangVersion>
     <Deterministic>false</Deterministic>
   </PropertyGroup>
